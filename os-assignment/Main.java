@@ -7,7 +7,6 @@ import util.Helper;
 import util.Reader;
 
 public class Main {
-
     private static final Reader addressReader = new Reader();
     private static final PageTable pageTable = new PageTable();
     private static final Tlb tlb = new Tlb();

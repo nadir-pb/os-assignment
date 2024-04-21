@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class Reader {
-
     private final ArrayList<Integer> logicalAddresses = new ArrayList<>();
     private BufferedReader logicalAddressReader;
     private int nextAddress = 0;
@@ -18,6 +17,7 @@ public class Reader {
 
     public void setup() {
         File addressFile = new File("C:\\Users\\ASUS\\Desktop\\os-assignment\\os-assignment\\files\\addresses.txt");
+
         if (!addressFile.exists()) {
             System.out.println("Addresses.txt file not found in application directory!");
             return;
@@ -45,10 +45,10 @@ public class Reader {
     public int getNextAddress() {
         if (nextAddress < logicalAddresses.size()) {
             int address = logicalAddresses.get(nextAddress);
-            nextAddress++; // increment pointer to next location
+            nextAddress++;
             return address;
         } else {
-            return -1000000; // error code, no more addresses left
+            return -1000000;
         }
     }
 }

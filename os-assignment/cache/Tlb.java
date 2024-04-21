@@ -3,7 +3,6 @@ package cache;
 import algorithms.TlbMiss;
 
 public class Tlb {
-
     private final int[][] tlb = new int[16][3];
     private final TlbMiss tlbMiss = new TlbMiss();
     private int counter = 0;

@@ -1,7 +1,6 @@
 package PageTable;
 
 public class PageTable {
-
     private final int[] pageTable = new int[256];
 
     public PageTable() {

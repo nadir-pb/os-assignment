@@ -1,7 +1,6 @@
 package util;
 
 public class Helper {
-
     public int getPhysicalAddress(int frameNumber, int offset) {
         return frameNumber * 256 + offset;
     }
@@ -15,7 +14,6 @@ public class Helper {
         }
         return memory[frameNumber][offset];
     }
-
 
     public boolean isFrameEmpty(int frameNumber, byte[][] memory) {
         if (frameNumber < 0 || frameNumber > 255) {

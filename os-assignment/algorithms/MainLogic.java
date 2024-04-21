@@ -7,7 +7,8 @@ import util.Reader;
 
 public class MainLogic {
 
-    private static final Logger logger = new Logger("C:\\Users\\ASUS\\Desktop\\os-assignment\\os-assignment\\files\\log.txt");
+    private static final Logger logger = new Logger(
+            "C:\\Users\\ASUS\\Desktop\\os-assignment\\os-assignment\\files\\log.txt");
 
     public static void processAddresses(Reader addressReader, Tlb tlb, Helper helper,
                                         PhysicalMemory physicalMemory, PageTable pageTable) {
@@ -20,7 +21,7 @@ public class MainLogic {
         while (true) {
             logicalAddress = addressReader.getNextAddress();
             if (logicalAddress == -1000000) {
-                break; // reached end of addresses
+                break;
             }
             pageNumberAndOffset = getPageNumberAndOffsetFromAddress(logicalAddress);
             pageNumber = pageNumberAndOffset[0];
@@ -28,7 +29,6 @@ public class MainLogic {
 
             if (tlb.doesPageExist(pageNumber)) {
 
-                // this page already exists in the tlb lookup table, thus it is already loaded in physical memory (no page fault)
                 frameNumber = tlb.getFrameNumber(pageNumber);
                 physicalAddress = helper.getPhysicalAddress(frameNumber, offset);
                 value = helper.getByteFromMemory(frameNumber, offset, physicalMemory.getMemory());
@@ -36,7 +36,6 @@ public class MainLogic {
 
             } else if (pageTable.doesFrameExist(pageNumber)) {
 
-                // this page already exists in the page table, thus it is already loaded in physical memory (no page fault)
                 frameNumber = pageTable.getFrameNumber(pageNumber);
                 tlb.setFrameNumber(pageNumber, frameNumber);
                 physicalAddress = helper.getPhysicalAddress(frameNumber, offset);
@@ -44,13 +43,11 @@ public class MainLogic {
 
             } else {
 
-                // this page is not in the page table or tlb lookup table, thus is is not loaded in memory (Page fault)
-                // load it into memory and store the returned frame in the page table and tlb with the associated page number
                 numPageFaults++;
                 frameNumber = physicalMemory.loadFrameFromDiskAndStore(pageNumber);
 
                 if (frameNumber == -1) {
-                    return; // terminate execution
+                    return;
                 }
                 pageTable.setFrameNumber(pageNumber, frameNumber);
                 tlb.setFrameNumber(pageNumber, frameNumber);
@@ -69,7 +66,7 @@ public class MainLogic {
         int[] pageNumberAndOffset = new int[2];
         String binary = intToBinary(address);
         if (binary.length() < 16) {
-            binary = padBinaryStringTo16Bits(binary); // pad binary to 16 bits
+            binary = padBinaryStringTo16Bits(binary);
         }
         pageNumberAndOffset[1] = binaryToInt(binary.substring(binary.length() - 8));
         pageNumberAndOffset[0] = binaryToInt(binary.substring(binary.length() - 16, binary.length() - 8));
