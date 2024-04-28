@@ -16,7 +16,7 @@ public class Reader {
     }
 
     public void setup() {
-        File addressFile = new File("C:\\Users\\ASUS\\Desktop\\os-assignment\\os-assignment\\files\\addresses.txt");
+        File addressFile = new File(Constants.FILE);
 
         if (!addressFile.exists()) {
             System.out.println("Addresses.txt file not found in application directory!");

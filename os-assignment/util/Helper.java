@@ -2,12 +2,12 @@ package util;
 
 public class Helper {
     public int getPhysicalAddress(int frameNumber, int offset) {
-        return frameNumber * 256 + offset;
+        return frameNumber * Constants.RAM_SIZE + offset;
     }
 
     public byte getByteFromMemory(int frameNumber, int offset, byte[][] memory) {
-        if (frameNumber < 0 || frameNumber > 255
-                || offset < 0 || offset > 255) {
+        if (frameNumber < 0 || frameNumber > Constants.PAGE_SIZE
+                || offset < 0 || offset > Constants.PAGE_SIZE) {
             return -1;
         } else if (isFrameEmpty(frameNumber, memory)) {
             return -1;
@@ -16,7 +16,7 @@ public class Helper {
     }
 
     public boolean isFrameEmpty(int frameNumber, byte[][] memory) {
-        if (frameNumber < 0 || frameNumber > 255) {
+        if (frameNumber < 0 || frameNumber > Constants.PAGE_SIZE) {
             return false;
         }
         return memory[frameNumber][0] == -1

@@ -1,21 +1,22 @@
 package cache;
 
 import algorithms.TlbMiss;
+import util.Constants;
 
 public class Tlb {
-    private final int[][] tlb = new int[16][3];
+    private final int[][] tlb = new int[Constants.TLB_SIZE][3];
     private final TlbMiss tlbMiss = new TlbMiss();
     private int counter = 0;
 
     public Tlb() {
 
-        for (int i = 0; i < 16; i++) {
+        for (int i = 0; i < Constants.TLB_SIZE; i++) {
             tlb[i][0] = -1;
         }
     }
 
     public boolean doesPageExist(int pageNumber) {
-        for (int i = 0; i < 16; i++) {
+        for (int i = 0; i < Constants.TLB_SIZE; i++) {
             if (tlb[i][0] == pageNumber) {
                 return true;
             }
@@ -24,7 +25,7 @@ public class Tlb {
     }
 
     public int getFrameNumber(int pageNumber) {
-        for (int i = 0; i < 16; i++) {
+        for (int i = 0; i < Constants.TLB_SIZE; i++) {
             if (tlb[i][0] == pageNumber) {
                 return tlb[i][1];
             }
