@@ -54,8 +54,8 @@ public class PhysicalMemory {
             return -1;
         }
         try (RandomAccessFile randomAccess = new RandomAccessFile(backingStoreFile, "r")) {
-            randomAccess.seek(pageNumber * 256);
-            for (int i = 0; i < 256; i++) {
+            randomAccess.seek(pageNumber * Constants.RAM_SIZE);
+            for (int i = 0; i < Constants.RAM_SIZE; i++) {
                 memory[nextAvailableFrameNum][i] = randomAccess.readByte();
             }
             secondChanceBits[nextAvailableFrameNum] = true;
