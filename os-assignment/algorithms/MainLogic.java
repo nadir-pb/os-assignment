@@ -44,7 +44,11 @@ public class MainLogic {
             } else {
 
                 numPageFaults++;
-                frameNumber = physicalMemory.loadFrameFromDiskAndStore(pageNumber);
+                if(!physicalMemory.isMemoryFull()){
+                    frameNumber = physicalMemory.loadFrameFromDiskAndStore(pageNumber);
+                }else{
+                    frameNumber = physicalMemory.replaceFrame(pageNumber);
+                }
 
                 if (frameNumber == -1) {
                     return;
